@@ -23,14 +23,14 @@ services:
     container_name: nginx1
     restart: always
     tty: true
-    entrypoint: dockerize -template ./.docker/nginx/.nginx.conf.templ:/etc/nginx/conf.d
+    entrypoint: dockerize -template ./.docker/nginx/.nginx.conf.tmpl:/etc/nginx/conf.d
     environment: 
       - HOST=APP
       - PORT=9000
     ports: 
       - "8000:80"
     volumes: 
-      - .:/var/www  
+      - .:/var/www   
     networks:
       - app-network      
     depends_on: 

@@ -10,3 +10,19 @@ steps:
 - id: "Install Compose app"
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','composser','install']
+
+- id: "Copiando o .env"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','cp','.env.example','.env']
+
+- id: "key:generarte"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','key:generate']
+
+- id: "migrate" 
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','migrate']
+
+- id: "testes"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/vendor/bin/phpunit','-c','/var/www/phpunit.xml']

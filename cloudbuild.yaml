@@ -5,4 +5,8 @@ steps:
 
 - id: "Rodando-docker-ps"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['ps']
+  args: ['ps'] 
+
+  - id: "Install Compose app"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','composser','install']

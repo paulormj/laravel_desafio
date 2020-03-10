@@ -9,7 +9,7 @@ steps:
 
 - id: "Install Compose app"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec','-t','app','composser','install']
+  args: ['exec','-t','app','composer','install']
 
 - id: "Copiando o .env"
   name: 'gcr.io/cloud-builders/docker'

@@ -15,7 +15,7 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','cp','.env.example','.env']
 
-- id: "key:generarte"
+- id: "key:generate"
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','php','/var/www/artisan','key:generate']
 
@@ -23,6 +23,6 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','php','/var/www/artisan','migrate']
 
-- id: "testes"
+- id: "Php-testes"
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','php','/var/www/vendor/bin/phpunit','-c','/var/www/phpunit.xml']

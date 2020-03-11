@@ -23,7 +23,7 @@ services:
     container_name: nginx
     restart: always
     tty: true
-    entrypoint: dockerize -template ./.docker/nginx/.nginx.conf.tmpl:/etc/nginx/conf.d/nginx.conf
+    entrypoint: dockerize -template ./.docker/nginx/.nginx.conf.tmpl:/etc/nginx/conf.d/nginx.conf nginx -g "daemon off";
     environment: 
       - HOST=APP
       - PORT=9000

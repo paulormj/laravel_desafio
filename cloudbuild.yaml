@@ -19,10 +19,6 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','php','/var/www/artisan','key:generate']
 
-- id: "reset" 
-  name: 'gcr.io/cloud-builders/docker'
-  args: ['exec','-t','app','php','/var/www/artisan','reset']
-
 - id: "migrate" 
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec','-t','app','php','/var/www/artisan','migrate']

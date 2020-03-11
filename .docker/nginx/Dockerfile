@@ -1,5 +1,6 @@
 FROM nginx:1.15.0-alpine
 
+RUN apk add --no-cache bash openssl dos2unix
 WORKDIR /var/www
 
 ENV DOCKERIZE_VERSION v0.6.1

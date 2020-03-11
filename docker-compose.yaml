@@ -3,7 +3,7 @@ version: "3"
 services: 
   app:
     build: .
-    container_name: app1
+    container_name: app
     volumes: 
       - .:/var/www
     networks: 
@@ -15,12 +15,12 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
     depends_on: 
-      - db1
-      - redis1
+      - db
+      - redis
 
   nginx:
     build: .docker/nginx
-    container_name: nginx1
+    container_name: nginx
     restart: always
     tty: true
     entrypoint: dockerize -template ./.docker/nginx/.nginx.conf.tmpl:/etc/nginx/conf.d/nginx.conf
@@ -34,12 +34,12 @@ services:
     networks:
       - app-network      
     depends_on: 
-      - app1
+      - app
 
   db:
     image: mysql:5.7
     command: --innodb-use-native-aio=0
-    container_name: db1
+    container_name: db
     restart: always
     tty: true
     ports: 

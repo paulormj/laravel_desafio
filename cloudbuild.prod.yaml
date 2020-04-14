@@ -1,0 +1,36 @@
+steps:
+- id: "Rodando-docker-compose"
+  name: 'gcr.io/$PROJECT_ID/docker-compose:1.24.0'
+  args: ['-f','docker-compose.cloudbuild.yaml','up','-d']
+
+- id: "Rodando-docker-ps"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['ps'] 
+
+- id: "Install Compose app"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','composer','install']
+
+- id: "Copiando o .env"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','cp','.env.example','.env']
+
+- id: "key:generate"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','key:generate']
+
+- id: "migrate" 
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','migrate']
+
+- id: "Php-testes"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/vendor/bin/phpunit','-c','/var/www/phpunit.xml']
+
+- id: "Building image from Dockerfile.p"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t','gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA','-f','Dockerfile.prod','.']
+
+- id: "Pushing image"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push','gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA']

@@ -50,6 +50,6 @@ steps:
     - 'apply'
     - '-f'
     - 'k8s/app/deployment-new.yaml'
-  env:
-    'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
-    'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
+  env: 
+    - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'

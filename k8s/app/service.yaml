@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: app-service
 spec: 
-  type: NodePort
+  #type: NodePort
   ports:
-    - protocol: TCP
-      port: 9000
-      nodePort: 30080
+  - name: mysql
+    #- protocol: TCP
+    port: 9000
   selector: 
     app: app
